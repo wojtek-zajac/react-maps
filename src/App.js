@@ -1,11 +1,32 @@
 import React, { Component } from 'react'
 import './App.css'
+import * as FoursquareAPI from './FoursquareAPI'
+
 
 class App extends Component {
 
+  state = {
+    venues: [],
+    venueIds: []
+  }
+
   componentDidMount() {
+    this.getFousquareData()
     this.renderMap()
   }
+
+getFousquareData() {
+  FoursquareAPI.getAllVenues()
+  .then(venues => {
+    const venueIds = venues.map(venue => venue.id)
+    console.log(venues)
+    console.log(venueIds)
+    this.setState({
+      venues,
+      venueIds
+    })
+  }) 
+}
 
   renderMap = () => {
     loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDziy5R3lKj_zp1jOfiuH-TAncmOqG1MGo&v=3&callback=initMap')
@@ -17,6 +38,7 @@ class App extends Component {
       center: {lat: 50.06465, lng: 19.94498},
       zoom: 13
     })
+    console.log(map)
   }
 
   render() {
