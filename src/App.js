@@ -33,17 +33,37 @@ class App extends Component {
   }
 
   initMap = () => {
+
+    // Create a map
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 50.06465, lng: 19.94498},
       zoom: 13
     })
     console.log(map)
 
+    // Create an InfoWindow
+    const infoWindow = new window.google.maps.InfoWindow()
+
+    // Display Dynamic Markers
     this.state.venues.map(venue => {
+
+      const venueName = `${venue.name}`
+
+      // Create a marker
       const marker = new window.google.maps.Marker({
         position: {lat: venue.location.lat, lng: venue.location.lng},
         map: map,
         title: venue.name
+      })
+
+      // Click on a marker
+      marker.addListener('click', function() {
+
+        // Change content
+        infoWindow.setContent(venueName)
+
+        // Open an InfoWindow
+        infoWindow.open(map, marker)
       })
     })
   }
