@@ -12,21 +12,20 @@ class App extends Component {
 
   componentDidMount() {
     this.getFousquareData()
-    this.renderMap()
   }
 
-getFousquareData() {
-  FoursquareAPI.getAllVenues()
-  .then(venues => {
-    const venueIds = venues.map(venue => venue.id)
-    console.log(venues)
-    console.log(venueIds)
-    this.setState({
-      venues,
-      venueIds
-    })
-  }) 
-}
+  getFousquareData() {
+    FoursquareAPI.getAllVenues()
+    .then(venues => {
+      const venueIds = venues.map(venue => venue.id)
+      console.log(venues)
+      console.log(venueIds)
+      this.setState({
+        venues,
+        venueIds
+      }, this.renderMap)
+    }) 
+  }
 
   renderMap = () => {
     loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDziy5R3lKj_zp1jOfiuH-TAncmOqG1MGo&v=3&callback=initMap')
@@ -39,6 +38,14 @@ getFousquareData() {
       zoom: 13
     })
     console.log(map)
+
+    this.state.venues.map(venue => {
+      const marker = new window.google.maps.Marker({
+        position: {lat: venue.location.lat, lng: venue.location.lng},
+        map: map,
+        title: venue.name
+      })
+    })
   }
 
   render() {
