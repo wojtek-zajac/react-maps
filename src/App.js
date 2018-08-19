@@ -6,6 +6,7 @@ import FilterVenues from './Components/FilterVenues'
 import Map from './Components/Map'
 import * as FoursquareAPI from './FoursquareAPI'
 
+let openInfoWindow
 
 class App extends Component {
 
@@ -15,16 +16,15 @@ class App extends Component {
     visibleVenues: [],
     markers: [],
     visibleInfoWindow: '',
-    isInfoVindowOpen: false
+    isInfoVindowOpen: false,
+    infoWindows: [],
   }
-
 
   updateVisibleVenues = (visibleVenues) => {
     this.setState({
       visibleVenues: visibleVenues
     })
   }
-
 
   componentDidMount() {
     this.getFousquareData()
@@ -44,8 +44,6 @@ class App extends Component {
     }) 
   }
 
-
-
   showInfoWindow = (venue) => {
     console.log(venue)
     this.setState({
@@ -54,67 +52,63 @@ class App extends Component {
     })
   }
 
-
   renderMap = () => {
     loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDziy5R3lKj_zp1jOfiuH-TAncmOqG1MGo&v=3&callback=initMap')
     window.initMap = this.initMap
   }
 
   initMap = () => {
-
     // Create a map
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 50.06465, lng: 19.94498},
       zoom: 13
     })
     console.log(map)
-
-    // Create an InfoWindow
-    const infoWindow = new window.google.maps.InfoWindow()
-
     
-
-// { 
-
     // Display Dynamic Markers
     this.state.visibleVenues.map(venue => {
      
       const venueName = `${venue.name}`
-
+      
       // Create a marker
       const marker = new window.google.maps.Marker({
         position: {lat: venue.location.lat, lng: venue.location.lng},
         map: map,
-        title: venue.name
+        title: `${venue.name} - click for more details`
       })
 
       this.state.markers.push(marker)
 
+      // Create an InfoWindow
+      const infoWindow = new window.google.maps.InfoWindow()
 
-      // Click on a marker
-      marker.addListener('click', function() {
-
-        // Change content
-        infoWindow.setContent(venueName)
-
-        // Open an InfoWindow
-        infoWindow.open(map, marker)
+      this.state.infoWindows.push(infoWindow)
+     
+      // On a marker click
+      marker.addListener('click', () => {
+        if (openInfoWindow) {
+          marker.open = false
+          openInfoWindow.close()
+        }
+        if (!marker.open) {
+            // Open an InfoWindow and set its content
+            marker.open = true
+            openInfoWindow = infoWindow
+            infoWindow.setContent(venueName)
+            infoWindow.open(map, marker)
+        // Close an InfoWindow
+        } else {
+          marker.open = false
+          infoWindow.close()
+        }
       })
     })
-
-  // }
-
-
-
-
-
   }
 
   render() {
     return (
       <div className="app">
         <Header/>
-
         <main>
           <FilterVenues
             venues={this.state.venues}
@@ -122,11 +116,10 @@ class App extends Component {
             updateVisibleVenues={this.updateVisibleVenues}
             showInfoWindow={this.showInfoWindow}
             markers={this.state.markers}
+            infoWindows={this.state.infoWindows}
           />
-
           <Map/>
         </main>
-
         <Footer/>
       </div>
     )
