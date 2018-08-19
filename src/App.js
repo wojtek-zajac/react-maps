@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import './App.css'
+import Header from './Components/Header'
+import Footer from './Components/Footer'
+import FilterVenues from './Components/FilterVenues'
+import Map from './Components/Map'
 import * as FoursquareAPI from './FoursquareAPI'
 
 
@@ -70,9 +74,14 @@ class App extends Component {
 
   render() {
     return (
-      <main>
-        <div id="map"></div>
-      </main>
+      <div className="app">
+        <Header/>
+        <main>
+          <FilterVenues/>
+          <Map/>
+        </main>
+        <Footer/>
+      </div>
     )
   }
 }
