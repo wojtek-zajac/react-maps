@@ -12,8 +12,19 @@ class App extends Component {
   state = {
     venues: [],
     venueIds: [],
-    visibleVenues: []
+    visibleVenues: [],
+    markers: [],
+    visibleInfoWindow: '',
+    isInfoVindowOpen: false
   }
+
+
+  updateVisibleVenues = (visibleVenues) => {
+    this.setState({
+      visibleVenues: visibleVenues
+    })
+  }
+
 
   componentDidMount() {
     this.getFousquareData()
@@ -33,11 +44,16 @@ class App extends Component {
     }) 
   }
 
-  updateVisibleVenues = (visibleVenues) => {
+
+
+  showInfoWindow = (venue) => {
+    console.log(venue)
     this.setState({
-      visibleVenues: visibleVenues
+      visibleInfoWindow: venue,
+      isInfoVindowOpen: true
     })
   }
+
 
   renderMap = () => {
     loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDziy5R3lKj_zp1jOfiuH-TAncmOqG1MGo&v=3&callback=initMap')
@@ -56,9 +72,13 @@ class App extends Component {
     // Create an InfoWindow
     const infoWindow = new window.google.maps.InfoWindow()
 
-    // Display Dynamic Markers
-    this.state.venues.map(venue => {
+    
 
+// { 
+
+    // Display Dynamic Markers
+    this.state.visibleVenues.map(venue => {
+     
       const venueName = `${venue.name}`
 
       // Create a marker
@@ -67,6 +87,9 @@ class App extends Component {
         map: map,
         title: venue.name
       })
+
+      this.state.markers.push(marker)
+
 
       // Click on a marker
       marker.addListener('click', function() {
@@ -78,6 +101,13 @@ class App extends Component {
         infoWindow.open(map, marker)
       })
     })
+
+  // }
+
+
+
+
+
   }
 
   render() {
@@ -89,7 +119,9 @@ class App extends Component {
           <FilterVenues
             venues={this.state.venues}
             visibleVenues={this.state.visibleVenues}
-            updateVisibleVenues={this.updateVisibleVenues.bind(this)}
+            updateVisibleVenues={this.updateVisibleVenues}
+            showInfoWindow={this.showInfoWindow}
+            markers={this.state.markers}
           />
 
           <Map/>

@@ -9,10 +9,12 @@ class FilterVenues extends Component {
         if(query) {
             const match = new RegExp(escapeRegExp(query), 'i')
             showingNames = this.props.venues.filter((venue) => match.test(venue.name))
+
+            // this.props.updateVisibleVenues(showingNames)
         } else {
             showingNames = this.props.venues
         }
-
+        
         showingNames.sort(sortBy('name'))
 
         this.props.updateVisibleVenues(showingNames)
@@ -35,7 +37,9 @@ class FilterVenues extends Component {
                 <ul className="list-items">
                     {this.props.visibleVenues.map(venue => {
                             return (
-                                <li key={venue.id}
+                                <li 
+                                    key={venue.id}
+                                    onClick={() => {this.props.showInfoWindow(venue.id)}}
                                 >
                                     {venue.name}
                                 </li>
