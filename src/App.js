@@ -28,6 +28,11 @@ class App extends Component {
 
   componentDidMount() {
     this.getFousquareData()
+    window.gm_authFailure = this.gm_authFailure
+  }
+
+  gm_authFailure() {
+    window.alert('Google Maps error')
   }
 
   getFousquareData() {
@@ -143,6 +148,9 @@ function loadScript(url) {
   script.async = true
   script.defer = true
   index.parentNode.insertBefore(script, index)
+  script.onerror = () => {
+    alert('Some error occured with Google Maps. Please refresh the page')
+  }
 }
 
 export default App
