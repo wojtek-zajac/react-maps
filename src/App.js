@@ -11,7 +11,8 @@ class App extends Component {
 
   state = {
     venues: [],
-    venueIds: []
+    venueIds: [],
+    visibleVenues: []
   }
 
   componentDidMount() {
@@ -26,9 +27,16 @@ class App extends Component {
       console.log(venueIds)
       this.setState({
         venues,
-        venueIds
+        venueIds,
+        visibleVenues: venues
       }, this.renderMap)
     }) 
+  }
+
+  updateVisibleVenues = (visibleVenues) => {
+    this.setState({
+      visibleVenues: visibleVenues
+    })
   }
 
   renderMap = () => {
@@ -76,10 +84,17 @@ class App extends Component {
     return (
       <div className="app">
         <Header/>
+
         <main>
-          <FilterVenues/>
+          <FilterVenues
+            venues={this.state.venues}
+            visibleVenues={this.state.visibleVenues}
+            updateVisibleVenues={this.updateVisibleVenues.bind(this)}
+          />
+
           <Map/>
         </main>
+
         <Footer/>
       </div>
     )

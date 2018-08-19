@@ -26,3 +26,81 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.app {
+  height: 100vh;
+}
+
+.header {
+  background-color: lightblue;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.header-title {
+  margin: 0;
+  padding: 20px;
+}
+
+.toggle-list-button {
+  font-size: 1.8rem;
+  padding: 10px 15px 10px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 30px;
+}
+
+main {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.filter-container {
+  background-color: lightgreen;
+  width: 45%;
+}
+
+.toggle-element {
+  position: fixed;
+  left: 0;
+}
+
+.filter-input {
+  padding: 10px;
+  margin: 15px auto 10px;
+  width: 90%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  display: block;
+}
+
+.list-items {
+  list-style-type: none;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.list-items li {
+  padding: 0 5px 0 24px;
+}
+
+#map {
+  width: 100%;
+  height: calc(100vh - 135px);
+  
+}
+
+.footer {
+  background-color: lightgrey;
+  text-align: center;
+}
+
+.footer-text {
+  margin: 0;
+  padding: 20px;
+}

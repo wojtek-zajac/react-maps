@@ -4,9 +4,7 @@ class Header extends Component {
 
     toggleFilterList = () => {
         const filterContainer = document.querySelector('.filter-container')
-        const mapElement = document.getElementById('map')
         filterContainer.classList.toggle('toggle-element')
-        mapElement.classList.toggle('expand-map')
     }
 
     render() {
