@@ -74,7 +74,7 @@ class App extends Component {
       const marker = new window.google.maps.Marker({
         position: {lat: venue.location.lat, lng: venue.location.lng},
         map: map,
-        title: `${venue.name} - click for more details`
+        title: venue.name
       })
 
       this.state.markers.push(marker)
@@ -105,7 +105,16 @@ class App extends Component {
     })
   }
 
-  render() {
+clickOnMarker = (venueName) => {
+    console.log(venueName)
+    this.state.markers.map((marker) => {
+        if(marker.title === venueName) {
+            window.google.maps.event.trigger(marker, 'click');
+        }
+    })
+}
+
+render() {
     return (
       <div className="app">
         <Header/>
@@ -117,6 +126,7 @@ class App extends Component {
             showInfoWindow={this.showInfoWindow}
             markers={this.state.markers}
             infoWindows={this.state.infoWindows}
+            clickOnMarker={this.clickOnMarker}
           />
           <Map/>
         </main>

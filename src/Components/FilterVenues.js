@@ -51,16 +51,6 @@ class FilterVenues extends Component {
     console.log(this.props.visibleVenues,'Visible Venues')
   }
 
-  triggerMarkerClick = (venueName) => {
-    console.log(venueName)
-    this.props.markers.map((marker) => {
-      console.log(marker)
-        if(marker.title === venueName) {
-            window.google.maps.event.trigger(marker, 'click');
-        }
-    })
-}
-
   render() {
     return(
       <aside className="filter-container">
@@ -78,7 +68,7 @@ class FilterVenues extends Component {
               return (
                 <li 
                   key={venue.id}
-                  onClick={() => this.triggerMarkerClick(venue.name)}
+                  onClick={() => this.props.clickOnMarker(venue.name)}
                 >
                   {venue.name}
                 </li>
