@@ -32,7 +32,8 @@
 }
 
 .header {
-  background-color: lightblue;
+  background-color: #031015;
+  color: #e4eaed;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -52,14 +53,21 @@
   top: 30px;
 }
 
+.toggle-list-button:hover {
+  color: #d7ebd7;
+}
+
 main {
   display: flex;
   flex-flow: row nowrap;
 }
 
 .filter-container {
-  background-color: lightgreen;
-  width: 45%;
+  background-color: #d7ebd7;
+  border-right: 1px solid #39474d;
+  width: 50%;
+  overflow: auto;
+  box-sizing: border-box;
 }
 
 .toggle-element {
@@ -82,7 +90,7 @@ main {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  font-size: 0.9rem;
+  font-size: 0.96rem;
 }
 
 .list-items li {
@@ -96,8 +104,9 @@ main {
 }
 
 .footer {
-  background-color: lightgrey;
+  background-color: #031015;
   text-align: center;
+  color: #e4eaed;
 }
 
 .footer-text {
