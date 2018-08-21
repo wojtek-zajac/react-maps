@@ -69,7 +69,7 @@ class App extends Component {
       zoom: 13
     })
     console.log(map)
-    
+
     // Display Dynamic Markers
     this.state.visibleVenues.map(venue => {
      
@@ -107,16 +107,21 @@ class App extends Component {
           infoWindow.close()
         }
       })
+
+      // On the map click
+      map.addListener('click', () => {
+        infoWindow.close()
+      })
     })
   }
 
 clickOnMarker = (venueName) => {
-    console.log(venueName)
-    this.state.markers.map((marker) => {
-        if(marker.title === venueName) {
-            window.google.maps.event.trigger(marker, 'click');
-        }
-    })
+  console.log(venueName)
+  this.state.markers.map((marker) => {
+      if (marker.title === venueName) {
+        window.google.maps.event.trigger(marker, 'click');
+      }
+  })
 }
 
 render() {
