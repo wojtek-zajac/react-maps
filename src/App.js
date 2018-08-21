@@ -122,6 +122,7 @@ class App extends Component {
             infoWindow.open(map, marker)
             map.setZoom(mapOnClickZoom)
             map.setCenter(marker.getPosition())
+            map.panTo(marker.getPosition())
             marker.setAnimation(window.google.maps.Animation.BOUNCE)
         // Close an InfoWindow and reset the map
         } else {
