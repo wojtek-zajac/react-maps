@@ -26,7 +26,7 @@ class FilterVenues extends Component {
 
     this.props.updateVisibleVenues(showingNames)
     
-    // Dynamic update markers on the map - Udacity webinar
+    // Dynamic update markers on the map - from a Udacity webinar
     if (query !== '') {
       allVenues.forEach((venue, index) => {
         if (venue.name.toLowerCase().includes(query.toLowerCase())) {
@@ -36,19 +36,19 @@ class FilterVenues extends Component {
             visibleVenues.close()
           }
           markers[index].setVisible(false)
-          infoWindows[index].close(map, markers[index]);
+          infoWindows[index].close(map, markers[index])
         }
       })
     } else {
       allVenues.forEach((venue, index) => {
         if (markers.length && markers[index]) {
           markers[index].setVisible(true)
-          markers[index].setAnimation(window.google.maps.Animation.DROP);
-          infoWindows[index].close(map, markers[index]);
+          markers[index].setAnimation(window.google.maps.Animation.DROP)
+          infoWindows[index].close(map, markers[index])
         }
       })
     }
-    console.log(this.props.visibleVenues,'Visible Venues')
+    console.log('Visible Venues: ',this.props.visibleVenues)
   }
 
   render() {

@@ -17,7 +17,7 @@ class App extends Component {
     markers: [],
     visibleInfoWindow: '',
     isInfoVindowOpen: false,
-    infoWindows: [],
+    infoWindows: []
   }
 
   updateVisibleVenues = (visibleVenues) => {
@@ -63,10 +63,16 @@ class App extends Component {
   }
 
   initMap = () => {
+
+    // Map defaults
+    const mapCenter = {lat: 50.06465, lng: 19.94498}
+    const mapDefaultZoom = 13
+    const mapOnClickZoom = 15
+
     // Create a map
     const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: {lat: 50.06465, lng: 19.94498},
-      zoom: 13
+      center: mapCenter,
+      zoom: mapDefaultZoom
     })
     console.log(map)
 
@@ -88,9 +94,17 @@ class App extends Component {
       const infoWindow = new window.google.maps.InfoWindow()
 
       this.state.infoWindows.push(infoWindow)
-     
+
+      // Reset map on close an InfoWindow
+      infoWindow.addListener('closeclick',function(){
+        map.setCenter(mapCenter)
+        map.setZoom(mapDefaultZoom)
+        marker.setAnimation(null)
+     })
+
       // On a marker click
       marker.addListener('click', () => {
+
         if (openInfoWindow) {
           marker.open = false
           openInfoWindow.close()
@@ -101,16 +115,25 @@ class App extends Component {
             openInfoWindow = infoWindow
             infoWindow.setContent(venueName)
             infoWindow.open(map, marker)
-        // Close an InfoWindow
+            map.setZoom(mapOnClickZoom)
+            map.setCenter(marker.getPosition())
+            marker.setAnimation(window.google.maps.Animation.BOUNCE)
+        // Close an InfoWindow and reset the map
         } else {
           marker.open = false
           infoWindow.close()
+          map.setCenter(mapCenter)
+          map.setZoom(mapDefaultZoom)
+          
         }
       })
 
-      // On the map click
+      // Reset all on the map click
       map.addListener('click', () => {
         infoWindow.close()
+        map.setCenter(mapCenter)
+        map.setZoom(mapDefaultZoom)
+        marker.setAnimation(null)
       })
     })
   }
@@ -119,7 +142,7 @@ clickOnMarker = (venueName) => {
   console.log(venueName)
   this.state.markers.map((marker) => {
       if (marker.title === venueName) {
-        window.google.maps.event.trigger(marker, 'click');
+        window.google.maps.event.trigger(marker, 'click')
       }
   })
 }
