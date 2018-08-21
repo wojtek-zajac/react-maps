@@ -54,15 +54,16 @@ class FilterVenues extends Component {
   render() {
     return(
       <aside className="filter-container">
-        
-        <input
-          className="filter-input"
-          type="text"
-          placeholder="Filter restaurants"
-          value={this.showingNames}
-          onChange={(event) => this.onFilterChange(event.target.value)}
-        >
-        </input>
+        <div className="filter-input-container">
+          <input
+            className="filter-input"
+            type="text"
+            placeholder="Filter restaurants"
+            value={this.showingNames}
+            onChange={(event) => this.onFilterChange(event.target.value)}
+          >
+          </input>
+        </div>
         <ul className="list-items">
           {this.props.visibleVenues.map(venue => {
               return (
