@@ -65,9 +65,9 @@ class App extends Component {
   initMap = () => {
 
     // Map defaults
-    const mapCenter = {lat: 50.06465, lng: 19.94498}
-    const mapDefaultZoom = 13
-    const mapOnClickZoom = 15
+    const mapCenter = {lat: 50.05965, lng: 19.94098}
+    const mapDefaultZoom = 15
+    const mapOnClickZoom = 17
 
     // Create a map
     const map = new window.google.maps.Map(document.getElementById('map'), {
