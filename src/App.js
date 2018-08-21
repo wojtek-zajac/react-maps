@@ -61,7 +61,7 @@ class App extends Component {
     loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDziy5R3lKj_zp1jOfiuH-TAncmOqG1MGo&v=3&callback=initMap')
     window.initMap = this.initMap
   }
-
+ 
   initMap = () => {
 
     // Map defaults
@@ -96,7 +96,7 @@ class App extends Component {
       this.state.infoWindows.push(infoWindow)
 
       // Reset map on close an InfoWindow
-      infoWindow.addListener('closeclick',function(){
+      infoWindow.addListener('closeclick', () =>{
         map.setCenter(mapCenter)
         map.setZoom(mapDefaultZoom)
         marker.setAnimation(null)
@@ -104,6 +104,11 @@ class App extends Component {
 
       // On a marker click
       marker.addListener('click', () => {
+
+        // Stop bouncing all markers
+        for (let i = 0; i < this.state.markers.length; i++) {
+          this.state.markers[i].setAnimation(null)
+        }
 
         if (openInfoWindow) {
           marker.open = false
