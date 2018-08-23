@@ -14,7 +14,7 @@ class Header extends Component {
                     className="header-title"
                     tabIndex={0}
                 >
-                Best Restaurants in Kraków, Poland
+                Best Restaurants in Kraków
                 </h1>
                  <i
                     className="fas fa-bars toggle-list-button"
