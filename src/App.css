@@ -69,7 +69,7 @@ main {
   overflow-y: auto;
   box-sizing: border-box;
   display: block;
-  height: 100%;
+  height: calc(100vh - 135px);
   max-height: 892px;
   min-width: 320px;
   position: relative;
@@ -142,18 +142,21 @@ main {
   text-align: center;
   color: #e4eaed;
   display: block;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: auto;
 }
 
 .footer-text {
-  margin: 0;
-  padding: 20px;
+  margin: 5px auto 5px;
+  padding: 1px;
   display: flex;
   flex-flow: row wrap;
   align-content: center;
   align-items: center;
   justify-content: center;
   justify-items: center;
-  height: 15px;
 }
 
 @media screen and (max-width: 640px) {
@@ -163,14 +166,17 @@ main {
   }
 }
 
-.copyright {
-  margin: 0 5px 0;
+.attribution {
+  margin: 5px;
+}
+
+.attribution a {
+  margin-right: 5px;
 }
 
 .attribution a {
   list-style-type: none;
   color: #3397db;
-  margin: 0 3px 0;
 }
 
 .attribution a:hover {
