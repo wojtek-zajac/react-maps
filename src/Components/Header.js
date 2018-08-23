@@ -10,12 +10,19 @@ class Header extends Component {
     render() {
         return(
             <header className="header">
-               
-                <h1 className="header-title">Best Restaurants in Kraków, Poland</h1>
-
+                <h1 
+                    className="header-title"
+                    tabIndex={0}
+                >
+                Best Restaurants in Kraków, Poland
+                </h1>
                  <i
                     className="fas fa-bars toggle-list-button"
+                    tabIndex={0}
+                    role="button"
+                    aria-label="show the list of restaurants"
                     onClick={this.toggleFilterList}
+                    onKeyPress={this.toggleFilterList}
                 ></i>
             </header>       
         )

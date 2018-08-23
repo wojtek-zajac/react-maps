@@ -5,9 +5,12 @@ class Footer extends Component {
 
     render() {
         return(
-            <header className="footer">
+            <footer 
+                className="footer"
+                tabIndex={0}
+            >
                 <p className="footer-text">Copyrights by Wojciech Zając</p>
-            </header>       
+            </footer>       
         )
     }    
 }

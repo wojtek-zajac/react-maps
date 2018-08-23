@@ -58,7 +58,9 @@ class FilterVenues extends Component {
           <input
             className="filter-input"
             type="text"
-            placeholder="Filter restaurants"
+            role="search" 
+            aria-label="search restaurant"
+            placeholder="Search restaurants"
             value={this.showingNames}
             onChange={(event) => this.onFilterChange(event.target.value)}
           >
@@ -69,7 +71,10 @@ class FilterVenues extends Component {
               return (
                 <li 
                   key={venue.id}
+                  tabIndex={0}
+                  role="button"
                   onClick={() => this.props.clickOnMarker(venue.name)}
+                  onKeyPress ={() => this.props.clickOnMarker(venue.name)}
                 >
                   {venue.name}
                 </li>

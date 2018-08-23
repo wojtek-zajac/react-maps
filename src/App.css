@@ -39,7 +39,7 @@
   padding: 10px 15px 10px;
   cursor: pointer;
   position: absolute;
-  left: 0;
+  left: 1px;
   top: 30px;
 }
 
@@ -115,6 +115,10 @@ main {
 }
 
 .list-items li:hover {
+  background-color: #e9e8e5f1;
+}
+
+.list-items li:focus {
   background-color: #e9e8e5f1;
 }
 
