@@ -4,6 +4,7 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import FilterVenues from './Components/FilterVenues'
 import Map from './Components/Map'
+import {mapStyles} from './Components/MapStyles' 
 import * as FoursquareAPI from './FoursquareAPI'
 
 let openInfoWindow
@@ -17,7 +18,8 @@ class App extends Component {
     markers: [],
     visibleInfoWindow: '',
     isInfoVindowOpen: false,
-    infoWindows: []
+    infoWindows: [],
+    mapStyles: mapStyles
   }
 
   updateVisibleVenues = (visibleVenues) => {
@@ -72,7 +74,8 @@ class App extends Component {
     // Create a map
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: mapCenter,
-      zoom: mapDefaultZoom
+      zoom: mapDefaultZoom,
+      styles: mapStyles
     })
     console.log(map)
 
