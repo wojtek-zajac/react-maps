@@ -1,15 +1,19 @@
 {
+  "homepage": "https://wojtek-zajac.github.io/react-maps",
   "name": "react-maps",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
+    "gh-pages": "^1.2.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-scripts": "1.1.4",
     "sort-by": "^1.2.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
