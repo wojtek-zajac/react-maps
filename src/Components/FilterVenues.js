@@ -49,6 +49,7 @@ class FilterVenues extends Component {
   }
 
   render() {
+    this.props.venues.sort(sortBy('name'))
     return(
       <aside className="filter-container">
         <div className="filter-input-container">
