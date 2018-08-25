@@ -88,7 +88,7 @@ class App extends Component {
 
     // Display Dynamic Markers
     this.state.visibleVenues.map(venue => {
-     
+      
       const venueName = `${venue.name}`
       const venueCategory = `${venue.categories[0].name}`
       const venueAddress = `${venue.location.address}`
@@ -157,6 +157,8 @@ class App extends Component {
         map.setZoom(mapDefaultZoom)
         marker.setAnimation(null)
       })
+
+      return true
     })
   }
 
@@ -165,6 +167,9 @@ clickOnMarker = (venueName) => {
   this.state.markers.map((marker) => {
       if (marker.title === venueName) {
         window.google.maps.event.trigger(marker, 'click')
+        return true
+      } else {
+        return false
       }
   })
 }
