@@ -7,8 +7,10 @@ class Map extends Component {
             <div 
                 id="map"
                 role="application"
+                aria-label="Cracow map of restaurants"
                 tabIndex={-1}
-                ></div>
+            >
+            </div>
         )
     }
 }

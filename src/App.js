@@ -33,22 +33,28 @@ class App extends Component {
     window.gm_authFailure = this.gm_authFailure
   }
 
+  // Handle Google Maps error
   gm_authFailure() {
     window.alert('Google Maps error')
   }
 
   getFousquareData() {
     FoursquareAPI.getAllVenues()
-    .then(venues => {
-      const venueIds = venues.map(venue => venue.id)
-      console.log(venues)
-      console.log(venueIds)
-      this.setState({
-        venues,
-        venueIds,
-        visibleVenues: venues
-      }, this.renderMap)
-    }) 
+      .then(venues => {
+        const venueIds = venues.map(venue => venue.id)
+        console.log(venues)
+        console.log(venueIds)
+        this.setState({
+          venues,
+          venueIds,
+          visibleVenues: venues
+        }, this.renderMap)
+      })
+      .catch(error => {
+        console.error(error)
+        const errorMessage = `Something went wrong. Please try again later`
+          alert(errorMessage)
+      })
   }
 
   showInfoWindow = (venue) => {
@@ -83,6 +89,11 @@ class App extends Component {
     this.state.visibleVenues.map(venue => {
      
       const venueName = `${venue.name}`
+      const venueCategory = `${venue.categories[0].name}`
+      const venueAddress = `${venue.location.address}`
+      const infoWindowContent = `<h1 class="venue-name">${venueName}</h1>
+                                <h2 class="venue-category">Category: ${venueCategory}</h2>
+                                <p class="venue-address">Address: ${venueAddress}</p>`
       
       // Create a marker
       const marker = new window.google.maps.Marker({
@@ -106,7 +117,7 @@ class App extends Component {
      })
 
       // On a marker click
-      marker.addListener('click', () => {
+      marker.addListener('click', (e) => {
 
         // Stop bouncing all markers
         for (let i = 0; i < this.state.markers.length; i++) {
@@ -119,9 +130,10 @@ class App extends Component {
         }
         if (!marker.open) {
             // Open an InfoWindow and set its content
+            console.log()
             marker.open = true
             openInfoWindow = infoWindow
-            infoWindow.setContent(venueName)
+            infoWindow.setContent(infoWindowContent)
             infoWindow.open(map, marker)
             map.setZoom(mapOnClickZoom)
             map.setCenter(marker.getPosition())

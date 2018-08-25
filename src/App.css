@@ -182,3 +182,19 @@ main {
 .attribution a:hover {
   color: #268bf7c8;
 }
+
+.venue-name {
+  font-size: 1.4rem;
+  padding: 5px;
+}
+
+.venue-category {
+  font-size: 1.1rem;
+  color: #3a3a34bd;
+  padding: 5px;
+}
+
+.venue-address {
+  font-size: 0.9rem;
+  padding: 5px;
+}
