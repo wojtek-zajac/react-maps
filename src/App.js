@@ -66,7 +66,8 @@ class App extends Component {
   }
 
   renderMap = () => {
-    loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDziy5R3lKj_zp1jOfiuH-TAncmOqG1MGo&v=3&callback=initMap')
+    const googleKey = 'AIzaSyDziy5R3lKj_zp1jOfiuH-TAncmOqG1MGo'
+    loadScript(`https://maps.googleapis.com/maps/api/js?key=${googleKey}&v=3&callback=initMap`)
     window.initMap = this.initMap
   }
  
@@ -97,19 +98,20 @@ class App extends Component {
       
       // Create a marker
       const marker = new window.google.maps.Marker({
-        position: {lat: venue.location.lat, lng: venue.location.lng},
+        position: {
+          lat: venue.location.lat, 
+          lng: venue.location.lng
+        },
         map: map,
         title: venue.name
       })
-
       this.state.markers.push(marker)
 
       // Create an InfoWindow
       const infoWindow = new window.google.maps.InfoWindow()
-
       this.state.infoWindows.push(infoWindow)
 
-      // Reset map on close an InfoWindow
+      // Reset map on InfoWindow close click
       infoWindow.addListener('closeclick', () =>{
         map.setCenter(mapCenter)
         map.setZoom(mapDefaultZoom)
@@ -128,9 +130,9 @@ class App extends Component {
           marker.open = false
           openInfoWindow.close()
         }
+
         if (!marker.open) {
             // Open an InfoWindow and set its content
-            console.log()
             marker.open = true
             openInfoWindow = infoWindow
             infoWindow.setContent(infoWindowContent)
@@ -145,7 +147,6 @@ class App extends Component {
           infoWindow.close()
           map.setCenter(mapCenter)
           map.setZoom(mapDefaultZoom)
-          
         }
       })
 

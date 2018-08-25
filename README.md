@@ -31,16 +31,16 @@ To get started using the app:
 ## Dependencies
 * [Google Maps API](https://cloud.google.com/maps-platform/)
 * [Foursquare API](https://developer.foursquare.com/)
+* [escape-string-regexp](https://www.npmjs.com/package/escape-string-regexp)
+* [sort-by](https://www.npmjs.com/package/sort-by)
 
 ## Build
 
 * `npm build` or
 * `yarn build`
 
-This will build the app for production to the build folder. It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes. By default, it also includes a [service worker](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) so that your app loads from local cache on future visits.
+This will build the app for production to the build folder. It correctly bundles React in production mode and optimizes the build for the best performance. It also includes a [service worker](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) so that the app loads from local cache on future visits.
 
 ## Live Demo
 
-You can see the live demo [here](https://wojtek-zajac.github.io/react-maps/).
+You can see the a live demo of the app [here](https://wojtek-zajac.github.io/react-maps/).

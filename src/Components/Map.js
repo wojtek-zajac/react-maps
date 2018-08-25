@@ -10,7 +10,9 @@ class Map extends Component {
                 aria-label="Cracow map of restaurants"
                 tabIndex={-1}
             >
-                <div className="loading-map loader">
+                <div
+                    className="loading-map loader"
+                >
                     Loading...      
                 </div>
             </div>

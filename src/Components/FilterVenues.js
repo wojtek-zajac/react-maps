@@ -5,15 +5,12 @@ import sortBy from 'sort-by'
 class FilterVenues extends Component {
 
   onFilterChange(query ) {
-
     const allVenues = this.props.venues
     const visibleVenues = this.props.visibleVenues
     const map = document.getElementById('map')
     const markers = this.props.markers
     const infoWindows = this.props.infoWindows
     let showingNames
-
-    
 
     if (query) {
       const match = new RegExp(escapeRegExp(query), 'i')
